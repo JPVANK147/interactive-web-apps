@@ -1,0 +1,16 @@
+:root {
+    --color-green:
+    --color-white:
+    --color-dark-grey:
+    --color-meduim-grey:
+    --color-light-grey:
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0; 
+    background: red;
+}
