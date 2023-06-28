@@ -3,7 +3,7 @@ let status = "student"
 let count = 0
 let year = 2050
 
-if (date = "Month") {
+if (date = "month") {
 	console.log("January", 'New Year’s Day')
 	console.log("March", 'Women’s Day')
 	date = 'April'
