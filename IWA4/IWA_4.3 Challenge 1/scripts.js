@@ -5,22 +5,22 @@ let year = 2050
 
 if (date = "Month") {
 	console.log("January", 'New Year’s Day')
+	console.log("March", 'Women’s Day')
 	date = 'April'
 	console.log(date, 'Family Day')
 	console.log(date, 'Freedom Day')
-	count = count + 3
+	count = count + 4
 
 	if (status = "student") {
-	  	console.log('June', 'Youth Day')
+	  	console.log('August', 'Youth Day')
 		count = count + 1
   	}
 
-	console.log('August', 'Women’s Day')
 	console.log('September', 'Heritage Day')
 	date = 'December'
 	console.log(date, 'Human Rights Day')
 	console.log(date, 'Day of Reconciliation')
-	count = count + 4
+	count = count + 3
 
 	if (status = "parent") {
 	  	console.log(date, 'Christmas Day')
