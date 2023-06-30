@@ -25,7 +25,7 @@ if (location === 'NAM') {
   shipping = 800;
 }
 
-if (shoes + batteries + pens + shirts > 1000) {
+if (shoes + toys + batteries + pens + shirts > 1000) {
   if (location === 'NAM' && customers < 2) {
     if (location === 'RSA') {
       shipping = 0;
