@@ -7,6 +7,7 @@ let currency = '$';
 
 const location = 'RSA';
 const customers = 1;
+const calcShipping = 1500
 
 let shoes = 300 * 1;
 let toys = 100 * 5;
@@ -28,8 +29,7 @@ if (location === 'NAM') {
 if (shoes + toys + batteries + pens + shirts > 1000) {
   if (location === 'NAM' && customers < 2) {
     if (location === 'RSA') {
-      shipping = 0;
-      // calcShipping is not defined in your code. You may need to implement it separately.
+      shipping = 0 || calcShipping
     }
   }
 }
