@@ -1,4 +1,4 @@
-const nickname= "Timmy";
+const nickname = "Timmy";
 const firstname = "Timothy";
 
-console.log(`Good Morning, ${nickname || firstname}!`)
+console.log(`Good Morning${(nickname || firstname) ? ` ${nickname || firstname}` : ''}!`);
