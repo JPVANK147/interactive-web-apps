@@ -32,6 +32,6 @@ const rent = {
 
 const taxAsDecimal = tax[913] / 100
 const startingAfterTax = salary * 1 - taxAsDecimal
-const type = lodging + size
-const balance = expenses.transport - expenses.food - rent["large-apartment"]
+const type = size + lodging
+const balance = expenses.transport.toFixed(2) - expenses.food.toFixed(2) - rent["large-apartment"]
 console.log(balance)
