@@ -55,17 +55,22 @@ const futureId = 9
 
 console.log(holidays[futureId]?.name || `ID ${futureId} not created yet`)
 
-let copied = {...holidays[christmas]}
-copied.name = 'X-mas Day'
-const correctDate = new Date(copied.date)
-correctDate.getHours(0)
-correctDate.getMinutes(0)
-const isEarlier = copied.date < holidays[6].date
+let copied = {...holidays}
+copied[6].name = 'X-mas'
+const correctDate = new Date(copied[6].date)
+correctDate.setHours(0, 0, 0)
+correctDate.getHours()
+const isEarlier = copied[6].date.getHours() < correctDate.getHours()
 console.log('New date is earlier:', isEarlier)
-if (isEarlier) copied.date = correctDate
-console.log('ID change:', holidays[christmas].id != copied.id || copied.id)
-console.log('Name change:', holidays[christmas].name != copied.name || copied.name)
-console.log('Date change:', holidays[christmas].date != copied.date || copied.date)
+if (isEarlier) copied[6].date = correctDate
+console.log('ID change:', copied[6].id != holidays[6].id)
+console.log('Name change:', copied[6].name != copied[6].name || copied[6].name)
+const originalDateString = copied[6].date != copied[6].date || copied[6].date;
+const originalDate = new Date(originalDateString)
+const day = originalDate.getDate()
+const month = originalDate.getMonth() + 1
+const year = originalDate.getFullYear()
+console.log('Date change:', `${day}/${month}/${year}`)
 
 const firstHolidayTimestamp = Math.min(
     holidays[0].date.getTime(),
