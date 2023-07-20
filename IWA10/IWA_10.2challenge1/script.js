@@ -65,7 +65,7 @@ console.log('New date is earlier:', isEarlier)
 if (isEarlier) copied[6].date = correctDate
 console.log('ID change:', copied[6].id != holidays[6].id)
 console.log('Name change:', copied[6].name != copied[6].name || copied[6].name)
-const newDate = copied[6].date != copied[6].date || copied[6].date;
+const newDate = copied[6].date != copied[6].date || copied[6].date
 const originalDate = new Date(newDate)
 const day = originalDate.getDate()
 const month = originalDate.getMonth() + 1
