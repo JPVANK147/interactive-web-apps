@@ -72,37 +72,37 @@ const month = originalDate.getMonth() + 1
 const year = originalDate.getFullYear()
 console.log('Date change:', `${day}/${month}/${year}`)
 
-const firstHolidayTimestamp = Math.min(
-    holidays[0].date.getTime(),
-    holidays[1].date.getTime(),
-    holidays[2].date.getTime(),
-    holidays[3].date.getTime(),
-    holidays[4].date.getTime(),
-    holidays[5].date.getTime(),
-    holidays[6].date.getTime(),
-    holidays[7].date.getTime(),
-    holidays[8].date.getTime(),
-)
+const newHolidays = [
+    { date: new Date(2023, 0, 1) },
+    { date: new Date(2023, 11, 26) },
+    { date: new Date(2023, 3, 15) },
+    { date: new Date(2023, 4, 1) },
+    { date: new Date(2023, 6, 4) },
+    { date: new Date(2023, 10, 24) },
+    { date: new Date(2023, 7, 15) },
+    { date: new Date(2023, 2, 17) },
+];
 
-const lastHolidayTimestamp = Math.max(
-    holidays[0].date.getTime(),
-    holidays[1].date.getTime(),
-    holidays[2].date.getTime(),
-    holidays[3].date.getTime(),
-    holidays[4].date.getTime(),
-    holidays[5].date.getTime(),
-    holidays[6].date.getTime(),
-    holidays[7].date.getTime(),
-    holidays[8].date.getTime(),
-)
+const timestamps = newHolidays.map(holiday => holiday.date.getTime());
 
-const firstDay = new Date(firstHolidayTimestamp).getDate()
-const firstMonth = new Date(firstHolidayTimestamp).getMonth() + 1
-const lastDay = new Date(lastHolidayTimestamp).getDate()
-const lastMonth = new Date(lastHolidayTimestamp).getMonth() + 1
+const firstHolidayTimestamp = Math.min(...timestamps);
+const lastHolidayTimestamp = Math.max(...timestamps);
 
-console.log(`${firstDay}/${firstMonth}/${currentYear}`)
-console.log(`${lastDay}/${lastMonth}/${currentYear}`)
+const firstHolidayDate = new Date(firstHolidayTimestamp);
+const lastHolidayDate = new Date(lastHolidayTimestamp);
 
-const randomHoliday = holidays[Math.random]
-console.log(randomHoliday.date)
+const firstDay = String(firstHolidayDate.getDate()).padStart(2, '0');
+const firstMonth = String(firstHolidayDate.getMonth() + 1).padStart(2, '0');
+const lastDay = String(lastHolidayDate.getDate()).padStart(2, '0');
+const lastMonth = String(lastHolidayDate.getMonth() + 1).padStart(2, '0');
+
+const sameCurrentYear = firstHolidayDate.getFullYear();
+
+console.log(`${firstDay}/${firstMonth}/${sameCurrentYear}`);
+console.log(`${lastDay}/${lastMonth}/${sameCurrentYear}`);
+
+const randomIndex = Math.floor(Math.random() * newHolidays.length);
+const randomHolidayDate = newHolidays[randomIndex].date;
+const randomDay = String(randomHolidayDate.getDate()).padStart(2, '0');
+const randomMonth = String(randomHolidayDate.getMonth() + 1).padStart(2, '0');
+console.log(`${randomDay}/${randomMonth}/${sameCurrentYear}`);
