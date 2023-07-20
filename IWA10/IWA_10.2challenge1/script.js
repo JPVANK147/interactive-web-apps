@@ -83,26 +83,26 @@ const newHolidays = [
     { date: new Date(2023, 2, 17) },
 ];
 
-const timestamps = newHolidays.map(holiday => holiday.date.getTime());
+const timestamps = newHolidays.map(holiday => holiday.date.getTime())
 
-const firstHolidayTimestamp = Math.min(...timestamps);
-const lastHolidayTimestamp = Math.max(...timestamps);
+const firstHolidayTimestamp = Math.min(...timestamps)
+const lastHolidayTimestamp = Math.max(...timestamps)
 
-const firstHolidayDate = new Date(firstHolidayTimestamp);
-const lastHolidayDate = new Date(lastHolidayTimestamp);
+const firstHolidayDate = new Date(firstHolidayTimestamp)
+const lastHolidayDate = new Date(lastHolidayTimestamp)
 
-const firstDay = String(firstHolidayDate.getDate()).padStart(2, '0');
-const firstMonth = String(firstHolidayDate.getMonth() + 1).padStart(2, '0');
-const lastDay = String(lastHolidayDate.getDate()).padStart(2, '0');
-const lastMonth = String(lastHolidayDate.getMonth() + 1).padStart(2, '0');
+const firstDay = String(firstHolidayDate.getDate()).padStart(2, '0')
+const firstMonth = String(firstHolidayDate.getMonth() + 1).padStart(2, '0')
+const lastDay = String(lastHolidayDate.getDate()).padStart(2, '0')
+const lastMonth = String(lastHolidayDate.getMonth() + 1).padStart(2, '0')
 
-const sameCurrentYear = firstHolidayDate.getFullYear();
+const sameCurrentYear = firstHolidayDate.getFullYear()
 
-console.log(`${firstDay}/${firstMonth}/${sameCurrentYear}`);
-console.log(`${lastDay}/${lastMonth}/${sameCurrentYear}`);
+console.log(`${firstDay}/${firstMonth}/${sameCurrentYear}`)
+console.log(`${lastDay}/${lastMonth}/${sameCurrentYear}`)
 
-const randomIndex = Math.floor(Math.random() * newHolidays.length);
-const randomHolidayDate = newHolidays[randomIndex].date;
-const randomDay = String(randomHolidayDate.getDate()).padStart(2, '0');
-const randomMonth = String(randomHolidayDate.getMonth() + 1).padStart(2, '0');
-console.log(`${randomDay}/${randomMonth}/${sameCurrentYear}`);
+const randomIndex = Math.floor(Math.random() * newHolidays.length)
+const randomHolidayDate = newHolidays[randomIndex].date
+const randomDay = String(randomHolidayDate.getDate()).padStart(2, '0')
+const randomMonth = String(randomHolidayDate.getMonth() + 1).padStart(2, '0')
+console.log(`${randomDay}/${randomMonth}/${sameCurrentYear}`)
