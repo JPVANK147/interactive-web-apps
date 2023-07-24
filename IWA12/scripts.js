@@ -36,14 +36,13 @@ const book1Checkout = book1Doc.querySelector('.checkout')
 const book1Checkin = book1Doc.querySelector('.checkin')
 
 book1Status.style.color = STATUS_MAP.overdue.color
+
 book1Reserve.disabled = STATUS_MAP.overdue.canReserve
 book1Checkout.disabled = STATUS_MAP.overdue.canCheckout
 book1Checkin.disabled = STATUS_MAP.overdue.canCheckIn
-
 book1Reserve.style.color = 'black'
 book1Checkout.style.color = 'black'
 book1Checkin.style.color = 'black'
-
 book1Reserve.style.background = 'none'
 book1Checkout.style.background = 'none'
 book1Checkin.style.background = 'none'
@@ -55,14 +54,13 @@ const book2Checkout = book2Doc.querySelector('.checkout')
 const book2Checkin = book2Doc.querySelector('.checkin')
 
 book2Status.style.color = STATUS_MAP.reserved.color
+
 book2Reserve.disabled = !STATUS_MAP.reserved.canReserve
 book2Checkout.disabled = !STATUS_MAP.reserved.canCheckout
 book2Checkin.disabled = !STATUS_MAP.reserved.canCheckIn
-
 book2Reserve.style.color = 'black'
 book2Checkout.style.color = 'black'
 book2Checkin.style.color = 'black'
-
 book2Reserve.style.background = 'none'
 book2Checkout.style.background = 'none'
 book2Checkin.style.background = 'none'
@@ -74,14 +72,13 @@ const book3Checkout = book3Doc.querySelector('.checkout')
 const book3Checkin = book3Doc.querySelector('.checkin')
 
 book3Status.style.color = STATUS_MAP.shelf.color
+
 book3Reserve.disabled = !STATUS_MAP.shelf.canReserve
 book3Checkout.disabled = !STATUS_MAP.shelf.canCheckout
 book3Checkin.disabled = !STATUS_MAP.shelf.canCheckIn
-
 book3Reserve.style.color = 'black'
 book3Checkout.style.color = 'black'
 book3Checkin.style.color = 'black'
-
 book3Reserve.style.background = 'none'
 book3Checkout.style.background = 'none'
 book3Checkin.style.background = 'none'
