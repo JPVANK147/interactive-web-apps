@@ -29,11 +29,10 @@ const STATUS_MAP = {
 
 // Edit below line
 
-const book1Doc = document.getElementById('book1')
-const book1Status = book1Doc.querySelector('.status')
-const book1Reserve = book1Doc.querySelector('.reserve')
-const book1Checkout = book1Doc.querySelector('.checkout')
-const book1Checkin = book1Doc.querySelector('.checkin')
+const book1Status = document.getElementById('book1').querySelector('.status')
+const book1Reserve = document.getElementById('book1').querySelector('.reserve')
+const book1Checkout = document.getElementById('book1').querySelector('.checkout')
+const book1Checkin = document.getElementById('book1').querySelector('.checkin')
 
 book1Status.style.color = STATUS_MAP.overdue.color
 
@@ -47,11 +46,10 @@ book1Reserve.style.background = 'none'
 book1Checkout.style.background = 'none'
 book1Checkin.style.background = 'none'
 
-const book2Doc = document.getElementById('book2')
-const book2Status = book2Doc.querySelector('.status')
-const book2Reserve = book2Doc.querySelector('.reserve')
-const book2Checkout = book2Doc.querySelector('.checkout')
-const book2Checkin = book2Doc.querySelector('.checkin')
+const book2Status = document.getElementById('book2').querySelector('.status')
+const book2Reserve = document.getElementById('book2').querySelector('.reserve')
+const book2Checkout = document.getElementById('book2').querySelector('.checkout')
+const book2Checkin = document.getElementById('book2').querySelector('.checkin')
 
 book2Status.style.color = STATUS_MAP.reserved.color
 
@@ -65,11 +63,10 @@ book2Reserve.style.background = 'none'
 book2Checkout.style.background = 'none'
 book2Checkin.style.background = 'none'
 
-const book3Doc = document.getElementById('book3')
-const book3Status = book3Doc.querySelector('.status')
-const book3Reserve = book3Doc.querySelector('.reserve')
-const book3Checkout = book3Doc.querySelector('.checkout')
-const book3Checkin = book3Doc.querySelector('.checkin')
+const book3Status = document.getElementById('book3').querySelector('.status')
+const book3Reserve = document.getElementById('book3').querySelector('.reserve')
+const book3Checkout = document.getElementById('book3').querySelector('.checkout')
+const book3Checkin = document.getElementById('book3').querySelector('.checkin')
 
 book3Status.style.color = STATUS_MAP.shelf.color
 
