@@ -10,9 +10,9 @@ const data = {
 
 // Only edit below
 
-const { first = 1 } = data.first || {}
-const { second = 1 } = data.second || {}
-const { third = 1 } = data.third || {}
+const first = data.lists.find((item) => item[0] === 'first'[1])
+const second = data.lists.find((item) => item[0] === 'second'[1])
+const third = data.lists.find((item) => item[0] === 'third'[1])
 
 const result = []
 
