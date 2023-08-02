@@ -3,7 +3,7 @@
 function add(a, b) {
 	return a + b 
     //example1 = add(2 + 4) = 6
-    //example1 = multiply(2 * 4) = 8
+    //example2 = multiply(2 * 4) = 8
     //add * multiply = 6*8 = 48
 
 }
@@ -11,7 +11,7 @@ function add(a, b) {
 function multiply(a, b) { 
 	return a * b 
     //example1 = add(2 + 2) = 4
-    //example1 = multiply(2 * 2) = 4
+    //example2 = multiply(2 * 2) = 4
     //add * multiply = 4*4 = 16
 }
 
