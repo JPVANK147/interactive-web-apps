@@ -15,12 +15,13 @@ const MONTHS = [
     'Dec',
   ]
   
-  const data = {
+const data = {
     response: {
       requestType: "FETCH_ATHLETE_DATA",
       requestBy: "ALL_MATCHING_ATHLETES",
       forDisplay: "BEST_RACES",
   
+      
       data: {
         NM372: {
           firstName: "Nwabisa",
@@ -74,7 +75,7 @@ const MONTHS = [
     const fragment = document.createDocumentFragment();
   
     title = document.createElement(h2);
-    title= id;
+    title = id;
     fragment.appendChild(title);
   
     const list = document.createElement(dl);
@@ -89,23 +90,23 @@ const MONTHS = [
     const hours = total / 60;
     const minutes = total / hours / 60;
   
-    list.innerHTML = /* html */
-      <dt>Athlete</dt>,
-      <dd>${firstName surname}</dd>,
+    list.innerHTML = /* html */ 
+      `<dt>Athlete</dt>,
+      <dd>${firstName} ${surname}</dd>,
   
       <dt>Total Races</dt>,
       <dd>${races}</dd>,
   
       <dt>Event Date (Latest)</dt>,
-      <dd>${day month year}</dd>,
+      <dd>${day} ${month} ${year}</dd>,
   
       <dt>Total Time (Latest)</dt>,
-      <dd>${hours.padStart(2, 0) minutes}</dd>,
+      <dd>${hours.padStart(2, 0)+ minutes}</dd>,`
 
   
     fragment.appendChild(list);
-  }
+ } 
   
-  [NM372], [SV782] = data
-  document.querySelector(NM372).appendChild(createHtml(NM372));
-  document.querySelector(SV782).appendChild(createHtml(SV782));
+[NM372], [SV782] = data
+document.querySelector(NM372).appendChild(createHtml(NM372));
+document.querySelector(SV782).appendChild(createHtml(SV782));
