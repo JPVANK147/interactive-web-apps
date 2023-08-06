@@ -68,45 +68,48 @@ const data = {
   
   // Only edit below this comment
   
-  const createHtml = (athlete) => {
-    firstName, surname, id, races = athlete
-    [date], [time] = races.reverse()
-  
-    const fragment = document.createDocumentFragment();
-  
-    title = document.createElement(h2);
-    title = id;
-    fragment.appendChild(title);
-  
-    const list = document.createElement(dl);
-  
-    const day = date.getDate();
-    const month = MONTHS[date.month];
-    const year = date.year;
-  
-    first, second, third, fourth = timeAsArray;
-    total = first + second + third + fourth;
-  
-    const hours = total / 60;
-    const minutes = total / hours / 60;
-  
-    list.innerHTML = /* html */ 
-      `<dt>Athlete</dt>,
-      <dd>${firstName} ${surname}</dd>,
-  
-      <dt>Total Races</dt>,
-      <dd>${races}</dd>,
-  
-      <dt>Event Date (Latest)</dt>,
-      <dd>${day} ${month} ${year}</dd>,
-  
-      <dt>Total Time (Latest)</dt>,
-      <dd>${hours.padStart(2, 0)+ minutes}</dd>,`
+  const createHtml = (athleteId) => {
+    const athlete = data.response.data[athleteId] // go in data - response - data - [athleteId] this is to get the athlete's data using a Parameter
+    const { firstName, surname, id, races } = athlete // this is to acces the athlete  firstName, surname, id, races using a object destructuring
+    const [LatestRace] = races.reverse() // this is to get the races races of the athlete using a array destructuring.we specify that we want to extract the first (and only) element
+    const { date, time } = LatestRace // this is object destructuring - allows you to extract specific properties from an object and assign them to variables with the same names as the properties.
 
+    const fragment = document.createDocumentFragment() // this i dont know it say create offscreen node
+  
+    const title = document.createElement('h2') // this it to create a element 'h2' that is assign title
+    title.textContent = id // this is to get the text of id and that is "NM372" and "SV782"
+    fragment.appendChild(title) // method append a node as the last child of a element which it title
+  
+    const list = document.createElement('dl') // this it to create a element 'd1' that is assign list
+  
+    const day = new Date(date).getDate() // this is to get the new date in date form '2022-12-09T20:00:00.000Z' to 2 Dec 2022 using .getDate()
+    const month = MONTHS[new Date(date).getMonth()] // this is to get the month array to get the new month using the .getMonth()
+    const year = new Date(date).getFullYear() // this is to get the new year in date form to get 2022 year using .getFullYear
+  
+    const [first, second, third, fourth] = time // This is the array destructuring. We specify the variables to which we want to assign the elements of the 'time' array. example const first = 10, const second = 8, const third = 3, const fourth = 12;
+    const total = first + second + third + fourth // add the total of the times together like 10 + 8 + 6 + 12
+  
+    const hours = Math.floor(total / 60) 
+    const minutes = total % 60
+  
+    list.innerHTML = /* html */ `
+      <dt>Athlete:</dt>
+      <dd>${firstName} ${surname}</dd>
+  
+      <dt>Total Races:</dt>
+      <dd>${races.length}</dd>
+  
+      <dt>Event Date (Latest):</dt>
+      <dd>${day} ${month} ${year}</dd>
+  
+      <dt>Total Time (Latest):</dt>
+      <dd>${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}</dd>
+    `;
   
     fragment.appendChild(list);
- } 
   
-[NM372], [SV782] = data
-document.querySelector(NM372).appendChild(createHtml(NM372));
-document.querySelector(SV782).appendChild(createHtml(SV782));
+    return fragment;
+  };
+  
+  const NM372 = document.querySelector('[data-athlete="NM372"]').appendChild(createHtml("NM372"));
+  const SV782 = document.querySelector('[data-athlete="SV782"]').appendChild(createHtml("SV782"));
