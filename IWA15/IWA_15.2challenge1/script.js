@@ -10,22 +10,24 @@ const data = {
 
 // Only edit below
 
-const first = data.lists.find((item) => item[0] === 'first'[1])
-const second = data.lists.find((item) => item[0] === 'second'[1])
-const third = data.lists.find((item) => item[0] === 'third'[1])
+const first = data.lists.find(item => item[0] === 'first')[1]
+const second = data.lists.find(item => item[0] === 'second')[1]
+const third = data.lists.find(item => item[0] === 'third')[1]
 
 const result = []
 
 const extractBiggest = () => {
-	if (first[-1] > second[-1]) {
-		return first
+	if (first.length > 0 && (second.length === 0 || first[first.length - 1] > second[second.length - 1]) && (third.length === 0 || first[first.length - 1] > third[third.length - 1])) {
+	  return first.pop()
 	}
-
-	if (third[-1] < 1) {
-		return second
+  
+	if (second.length > 0 && (third.length === 0 || second[second.length - 1] > third[third.length - 1])) {
+	  return second.pop()
 	}
-	
-	return third
+  
+	if (third.length > 0) {
+	  return third.pop()
+	}
 }
 
 // Only edit above
