@@ -89,11 +89,11 @@ const data = {
     const [first, second, third, fourth] = time // This is the array destructuring. We specify the variables to which we want to assign the elements of the 'time' array. example const first = 10, const second = 8, const third = 3, const fourth = 12;
     const total = first + second + third + fourth // add the total of the times together like 10 + 8 + 6 + 12
   
-    const hours = Math.floor(total / 60) 
-    const minutes = total % 60
+    const hours = Math.floor(total / 60) // 91 / 60 = 1.5167 round it to floor it is 1 hour
+    const minutes = total % 60 // 91 % 60 = 31 minutes
   
-    list.innerHTML = /* html */ `
-      <dt>Athlete:</dt>
+    list.innerHTML = /* html */
+    ` <dt>Athlete:</dt>
       <dd>${firstName} ${surname}</dd>
   
       <dt>Total Races:</dt>
@@ -103,13 +103,13 @@ const data = {
       <dd>${day} ${month} ${year}</dd>
   
       <dt>Total Time (Latest):</dt>
-      <dd>${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}</dd>
-    `;
+      <dd>${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}</dd>`
+    //  The .innerHTML allows you to get or set the HTML content within that element.
+    fragment.appendChild(list)
   
-    fragment.appendChild(list);
-  
-    return fragment;
+    return fragment
   };
   
-  const NM372 = document.querySelector('[data-athlete="NM372"]').appendChild(createHtml("NM372"));
-  const SV782 = document.querySelector('[data-athlete="SV782"]').appendChild(createHtml("SV782"));
+  document.querySelector('[data-athlete="NM372"]').appendChild(createHtml("NM372")) // this is the get data-athlete="NM372" in the HTML to add the script, also add a node in html to insert the creatHtml of id "NM372"
+  document.querySelector('[data-athlete="SV782"]').appendChild(createHtml("SV782")) // this is the get data-athlete="SV782" in the HTML to add the script, also add a node in html to insert the creatHtml of id "SV782"
+  
