@@ -15,7 +15,7 @@ const MONTHS = [
     'December',
 ]
 
-const getDaysInMonth = (date) => new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate() // 2023 - 08 -0
+const getDaysInMonth = (date) => new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate() // 2023 - 08 - 0
 
 // Only edit below 
 
