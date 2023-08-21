@@ -9,6 +9,7 @@
  *
  * @param {Event} event 
  */
+
 import {
     state,
     createOrderData,
@@ -24,7 +25,7 @@ import {
 } from './view.js'
 
 const handleDragOver = (event) => {
-    event.preventDefault();
+    event.preventDefault()
     const path = event.path || event.composedPath()
     let column = null
 
@@ -32,7 +33,7 @@ const handleDragOver = (event) => {
         const { area } = element.dataset
         if (area) {
             column = area
-            break;
+            break
         }
     }
 
@@ -42,15 +43,14 @@ const handleDragOver = (event) => {
 }
 // Drag start 
 const handleDragStart = (event) => {
-    const orderId = event.target.dataset.id
-    event.dataTransfer.setData('text/plain', orderId)
+    event.dataTransfer.setData('text/plain', event.target.dataset.id)
     event.target.classList.add('dragging')
 }
 // Drag drop 
 const handleDragEnd = (event) => {
     event.target.classList.remove('dragging')
 }
-// Add the "Help" button overlay
+// Add the "Help" overlay
 const handleHelpToggle = (event) => {
     if (html.help.overlay.hasAttribute('open')) {
         html.help.overlay.removeAttribute('open')
@@ -81,7 +81,7 @@ const handleAddSubmit = (event) => {
 }
 // Edit the edit toggle overlay
 const handleEditToggle = (event) => {
-    const orderId = event.target.closest('.order')?.getAttribute('data-id');
+    const orderId = event.target?.getAttribute('data-id')
     if (orderId) {
         const order = state.orders[orderId]
         html.edit.id.value = order.id
@@ -89,14 +89,14 @@ const handleEditToggle = (event) => {
         html.edit.table.value = order.table
         html.edit.column.value = order.column
         html.edit.overlay.setAttribute('open', '')
-        html.edit.title.focus();
+        html.edit.title.focus()
     } else {
         if (html.edit.overlay.hasAttribute('open')) {
             html.edit.overlay.removeAttribute('open')
             html.other.add.focus()
         }
     }
-};
+}
 // Edit the edit submit overlay
 const handleEditSubmit = (event) => {
     event.preventDefault()
@@ -136,7 +136,7 @@ const handleDelete = (event) => {
 const handleDrop = (event) => {
     event.preventDefault()
     const orderId = event.dataTransfer.getData('text/plain')
-    const targetColumn = event.target.closest('[data-area]')?.dataset.area
+    const targetColumn = event.target?.dataset.area
 
     if (orderId && targetColumn) {
        
