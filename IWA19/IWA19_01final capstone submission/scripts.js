@@ -1,7 +1,7 @@
 import { BOOKS_PER_PAGE, authors, genres } from './data'
 
-const matches = books
-const page = 1
+matches = books
+page = 1
 
 if (!books && !Array.isArray(books)) throw new Error('Source required')
 if (!range && range.length < 2) throw new Error('Range must be an array with two numbers')
