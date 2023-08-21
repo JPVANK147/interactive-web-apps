@@ -1,7 +1,7 @@
 import { BOOKS_PER_PAGE, authors, genres } from './data'
 
-matches = books
-page = 1
+const matches = books
+const page = 1
 
 if (!books && !Array.isArray(books)) throw new Error('Source required')
 if (!range && range.length < 2) throw new Error('Range must be an array with two numbers')
@@ -16,10 +16,10 @@ const night = {
     light: '10, 10, 20',
 }
 
-fragment = document.createDocumentFragment()
+const fragment = document.createDocumentFragment()
 const extracted = books.slice(0, 36)
 
-for ({ author, image, title, id } of extracted) {
+for (const { author, image, title, id } of extracted) {
     const preview = createPreview({
         author,
         id,
@@ -30,54 +30,53 @@ for ({ author, image, title, id } of extracted) {
     fragment.appendChild(preview)
 }
 
-data-list-items.appendChild(fragment)
+dataListItems.appendChild(fragment)
 
-genres = document.createDocumentFragment()
-element = document.createElement('option')
+const genres = document.createDocumentFragment()
+let element = document.createElement('option')
 element.value = 'any'
 element = 'All Genres'
 genres.appendChild(element)
 
-for (const [id, name]; Object.entries(genres); i++) {
-    document.createElement('option')
+for (const [id, name] of Object.entries(genres)) {
+    element = document.createElement('option')
     element.value = value
     element.innerText = text
     genres.appendChild(element)
 }
 
-data-search-genres.appendChild(genres)
+dataSearchGenres.appendChild(genres)
 
-authors = document.createDocumentFragment(element)
+const authors = document.createDocumentFragment(element)
 const element = document.createElement('option')
 element.value = 'any'
 element.innerText = 'All Authors'
 authors.appendChild(element)
 
-for ([id, name]; Object.entries(authors); id++) {
-    document.createElement('option')
-    element.value = value
-    element = text
+for (const [id, name] of Object.entries(authors)) {
+    element = document.createElement('option')
+    element.value = id
+    element.innerText = name
     authors.appendChild(element)
 }
 
-data-search-authors.appendChild(authors)
+dataSearchAuthors.appendChild(authors)
 
-data-settings-theme.value === window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'night' : 'day'
-v = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'night' | 'day'
+const css = dataSettingsTheme.value === window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? night : day
+const v = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'night' | 'day'
 
-documentElement.style.setProperty('--color-dark', css[v].dark);
-documentElement.style.setProperty('--color-light', css[v].light);
-data-list-button = `Show more (${books.length} - ${BOOKS_PER_PAGE}`
+document.documentElement.style.setProperty('--color-dark', css[v].dark);
+document.documentElement.style.setProperty('--color-light', css[v].light);
+dataListButton.textContent = `Show more (${books.length - page * BOOKS_PER_PAGE})`
 
-data-list-button.disabled = !(matches.length - [page * BOOKS_PER_PAGE] > 0)
+dataListButton.disabled = !(matches.length - [page * BOOKS_PER_PAGE] > 0)
 
 data-list-button.innerHTML = /* html */[
-    '<span>Show more</span>',
-    '<span class="list__remaining"> (${matches.length - [page * BOOKS_PER_PAGE] > 0 ? matches.length - [page * BOOKS_PER_PAGE] : 0})</span>',
+    `<span>Show more</span>,
+    '<span class="list__remaining"> (${matches.length} - [${page} * ${BOOKS_PER_PAGE}] > 0 ? ${matches.length} - [${page} * ${BOOKS_PER_PAGE}] : 0})</span>`,
 ]
-const dataSearchcancel = document.querySelector('[data-search-cancel]')
-
-dataSearchcancel.addEventListener('click', () => {
+const dataSearchCancel = document.querySelector('[data-search-cancel]')
+dataSearchCancel.addEventListener('click', () => {
      data-search-overlay.open === false 
 })
 
@@ -103,8 +102,40 @@ dataSettingsform.addEventListener('click', () => {
 
 const datalistitem = document.querySelector('[data-list-items]')
 
+dataListButton.addEventListener('click', () => {
+    const startIndex = page * BOOKS_PER_PAGE
+    const endIndex = startIndex + BOOKS_PER_PAGE
+    const extracted = matches.slice(startIndex, endIndex)
+
+    const fragment = document.createDocumentFragment()
+
+    for (const { author, image, title, id } of extracted) {
+        const preview = createPreview({
+            author,
+            id,
+            image,
+            title
+        });
+
+        fragment.appendChild(preview)
+    }
+
+    dataListItem.appendChild(fragment)
+    page++
+
+    const remaining = matches.length - page * BOOKS_PER_PAGE
+    dataListButton.disabled = remaining <= 0
+
+    dataListButton.innerHTML = `
+        <span>Show more</span>
+        <span class="list__remaining"> (${remaining > 0 ? remaining : 0})</span>
+    `
+
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+})
+
 dataListbutton.addEventListener('click', () => {
-    datalistitem.appendChild(createPreviewsFragment(matches, page * `${BOOKS_PER_PAGE}`, {`${page}` + 1} * `${BOOKS_PER_PAGE}`))
+    datalistitem.appendChild(createPreviewsFragment(matches, page * `${BOOKS_PER_PAGE}`, {`${page}` + 1} x `${BOOKS_PER_PAGE}`))
     actions.list.updateRemaining()
     page = page + 1
     })
@@ -114,7 +145,7 @@ dataHeaderSearch.addEventListener('click', () => {
     data-search-title.focus();
 })
 
-data-search-form.addEventListener('click', (filters) => {
+data-search-form.addEventListener('click', (event) => {
     preventDefault()
     const formData = new FormData(event.target)
     const filters = Object.fromEntries(formData)
