@@ -1,5 +1,104 @@
-import { BOOKS_PER_PAGE, authors, genres } from './data'
+import { BOOKS_PER_PAGE, authors, genres, books } from './data.js'
 
+// Select elements by class or ID
+const dataListItems = document.querySelector('.list__items')
+const dataListButton = document.querySelector('.list__button')
+let currentIndex = 0
+const page = 1
+
+// Function to render a book
+function renderBook(book) {
+    const authorName = authors[book.author]
+    const genreNames = book.genres.map(genreId => genres[genreId]).join(', ')
+    
+    const bookElement = `
+        <div class="list__message_show">
+            <div class="list__items">
+                <img src="${book.image}">
+                    <div class=list__message_show>
+                        <h3>${book.title}</h3>
+                        <p class="list__author">${authorName}</p>
+                    </div>
+                </img>
+            </div>
+        </div>
+    `
+
+    dataListItems.innerHTML += bookElement
+}
+
+// Function to render a set of books
+function renderBooks(startIndex) {
+    dataListItems.innerHTML = ''
+
+    for (let i = startIndex; i < startIndex + BOOKS_PER_PAGE && i < books.length; i++) {
+        renderBook(books[i])
+    }
+
+    if (startIndex + BOOKS_PER_PAGE >= books.length) {
+        dataListButton.style.display = 'none' // Hide button when no more books to show
+    }
+}
+
+const remainingBooks = books.length - currentIndex - BOOKS_PER_PAGE > 0 ? books.length - currentIndex - BOOKS_PER_PAGE : 0
+dataListButton.innerHTML = /* html */
+        `<span>Show more</span>
+        <span class="list__remaining"> (${remainingBooks})</span>`
+
+dataListButton.addEventListener('click', () => {
+    currentIndex += BOOKS_PER_PAGE
+    renderBooks(currentIndex)
+    
+    const remainingBooks = books.length - currentIndex - BOOKS_PER_PAGE > 0 ? books.length - currentIndex - BOOKS_PER_PAGE : 0
+    dataListButton.innerHTML = /* html */
+        `<span>Show more</span>
+        <span class="list__remaining"> (${remainingBooks})</span>`;
+})
+
+// Initial rendering
+renderBooks(currentIndex);
+
+function openPreviewOverlay(data) {
+    const overlay = document.querySelector('[data-list-active]')
+    const previewImage = overlay.querySelector('[data-list-image]')
+    const previewTitle = overlay.querySelector('[data-list-title]')
+    const previewSubtitle = overlay.querySelector('[data-list-subtitle]')
+    const previewDescription = overlay.querySelector('[data-list-description]')
+
+    previewImage.src = data.imageSrc
+    previewTitle.textContent = data.title;
+    previewSubtitle.textContent = data.subtitle;
+    previewDescription.textContent = data.description;
+
+    overlay.showModal()
+}
+
+const previewItems = document.querySelectorAll('[data-list-message]');
+previewItems.forEach((preview) => {
+  preview.addEventListener('click', (event) => {
+    const clickedPreview = event.currentTarget;
+    const bookId = clickedPreview.getAttribute('data-book-id'); // Assuming you have a data attribute for book id
+
+    // Find the book data by its ID
+    const bookData = books.find((book) => book.id === bookId);
+
+    if (bookData) {
+      const authorName = authors[bookData.author];
+      const genreNames = bookData.genres.map((genreId) => genres[genreId]);
+
+      const previewData = {
+        imageSrc: bookData.image,
+        title: bookData.title,
+        subtitle: `Author: ${authorName} | Genres: ${genreNames.join(', ')}`,
+        description: bookData.description,
+      };
+
+      openPreviewOverlay(previewData);
+    }
+  })
+})
+
+/*
 const matches = books
 const page = 1
 
@@ -16,9 +115,11 @@ const night = {
     light: '10, 10, 20',
 }
 
-const fragment = document.createDocumentFragment()
+const fragments = document.createDocumentFragment()
 const extracted = books.slice(0, 36)
 
+
+// This is the preview of books of authors
 for (const { author, image, title, id } of extracted) {
     const preview = createPreview({
         author,
@@ -71,11 +172,13 @@ dataListButton.textContent = `Show more (${books.length - page * BOOKS_PER_PAGE}
 
 dataListButton.disabled = !(matches.length - [page * BOOKS_PER_PAGE] > 0)
 
-data-list-button.innerHTML = /* html */[
+data-list-button.innerHTML = /* html */ /*
     `<span>Show more</span>,
-    '<span class="list__remaining"> (${matches.length} - [${page} * ${BOOKS_PER_PAGE}] > 0 ? ${matches.length} - [${page} * ${BOOKS_PER_PAGE}] : 0})</span>`,
-]
+    '<span class="list__remaining"> (${matches.length} - [${page} * ${BOOKS_PER_PAGE}] > 0 ? ${matches.length} - [${page} * ${BOOKS_PER_PAGE}] : 0})</span>`
+
+/*
 const dataSearchCancel = document.querySelector('[data-search-cancel]')
+
 dataSearchCancel.addEventListener('click', () => {
      data-search-overlay.open === false 
 })
@@ -182,19 +285,18 @@ for ({ author, image, title, id }; extracted; i++) {
     element.classList = 'preview'
     element.setAttribute('data-preview', id)
 
-    element.innerHTML = /* html */ `
-            <img
-                class="preview__image"
-                src="${image}"
-            />
-            
-            <div class="preview__info">
-                <h3 class="preview__title">${title}</h3>
-                <div class="preview__author">${authors[authorId]}</div>
-            </div>
-        `
+    element.innerHTML = /* html */ /*
+        `<img
+            class="preview__image"
+            src="${image}"
+        />
+        
+        <div class="preview__info">
+            <h3 class="preview__title">${title}</h3>
+            <div class="preview__author">${authors[authorId]}</div>
+        </div>`
 
-    fragment.appendChild(element)
+fragment.appendChild(element)
 }
 
 data-list-items.appendChild(fragments)
@@ -203,7 +305,7 @@ initial === matches.length - [page * BOOKS_PER_PAGE]
 remaining === hasRemaining ? initial : 0
 data-list-button.disabled = initial > 0
 
-data-list-button.innerHTML = /* html */ `
+data-list-button.innerHTML = /* html */ /*`
         <span>Show more</span>
         <span class="list__remaining"> (${remaining})</span>
     `
@@ -242,4 +344,4 @@ data-list-items.addEventListener('click', (event) => {
 
     data-list-subtitle === '${authors[active.author]} (${Date(active.published).year})'
     data-list-description === active.description
-})
+}) */

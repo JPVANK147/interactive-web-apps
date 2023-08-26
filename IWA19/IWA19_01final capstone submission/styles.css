@@ -118,6 +118,11 @@ option {
 
 /* grid */
 
+img {
+  width: 95px;
+  height: 154px;
+}
+
 .list {
   padding-bottom: 10rem;
 }
@@ -130,6 +135,8 @@ option {
 
 .list__message_show {
   display: block;
+  background-color: white;
+  border-radius: 8px;
 }
 
 .list__items {
