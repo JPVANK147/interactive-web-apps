@@ -122,17 +122,6 @@ dataListButton.addEventListener('click', () => {
 /**
  * Setting Overlay to change the theme to light and Dark
  */
-// This is the colour of dark and light
-const day = {
-    dark: '10, 10, 20',
-    light: '255, 255, 255',
-}
-
-const night = {
-    dark: '255, 255, 255',
-    light: '10, 10, 20',
-}
-
 // Open the Setting overlay when the setting button is clicked
 const dataHeaderSettings = document.querySelector('[data-header-settings]')
 dataHeaderSettings.addEventListener('click', () => {
@@ -168,6 +157,17 @@ dataSettingsOverlay.addEventListener('submit', (event) => {
 
     dataSettingsOverlay.open = false
 })
+
+// This is the colour of dark and light
+const day = {
+    dark: '10, 10, 20',
+    light: '255, 255, 255',
+}
+
+const night = {
+    dark: '255, 255, 255',
+    light: '10, 10, 20',
+}
 
 // This Code initial the theme setup based on Night and Day meaning Dark and Light theme
 function applyTheme(theme) {
@@ -296,6 +296,7 @@ window.addEventListener('scroll', () => {
     }
 })
 
+dataHeaderSearch.open()
 /*
 const genres = document.createDocumentFragment()
 let element = document.createElement('option')
