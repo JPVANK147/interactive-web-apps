@@ -296,7 +296,6 @@ window.addEventListener('scroll', () => {
     }
 })
 
-dataHeaderSearch.open()
 /*
 const genres = document.createDocumentFragment()
 let element = document.createElement('option')
