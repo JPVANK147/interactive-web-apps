@@ -1,4 +1,4 @@
-// scripts.js
+
 import { books, BOOKS_PER_PAGE, authors, genres } from "./data.js"
 
 const range = [0, 36]
@@ -17,6 +17,7 @@ function createPreview({ author, id, image, title }) {
     preview.classList.add("preview")
     preview.setAttribute("data-preview", id)
 
+    //The innerHTML content for the preview list of books
     preview.innerHTML = `
         <img class="preview__image" src="${image}" />
         <div class="preview__info">
@@ -24,7 +25,7 @@ function createPreview({ author, id, image, title }) {
             <div class="preview__author">${authors[author]}</div>
         </div>
         `
-
+    // AddEventListener to open the preview books
     preview.addEventListener("click", () => {
         const active = books.find((book) => book.id === id)
         if (!active) return
@@ -59,6 +60,7 @@ function createPreview({ author, id, image, title }) {
 const fragment = document.createDocumentFragment()
 const extracted = books.slice(0, 36)
 
+// Create the Preview of Author, Id, image, title
 for (const { author, image, title, id } of extracted) {
     const preview = createPreview({
         author,
@@ -134,13 +136,13 @@ const night = {
 // Open the Setting overlay when the setting button is clicked
 const dataHeaderSettings = document.querySelector('[data-header-settings]')
 dataHeaderSettings.addEventListener('click', () => {
-    dataSettingsOverlay.showModal()
+    dataSettingsOverlay.open = true
 })
 
 // Close the Setting overlay when the cancel button is clicked
 const dataSettingsCancel = document.querySelector('[data-settings-cancel]')
 dataSettingsCancel.addEventListener('click', () => {
-    dataSettingsOverlay.close()
+    dataSettingsOverlay.open = false
 })
 
 // Apply the selected theme and close the overlay when the save button is clicked
@@ -152,7 +154,7 @@ dataSettingsForm.addEventListener('submit', (event) => {
     const result = Object.fromEntries(formData)
     applyTheme(result.theme)
 
-    dataSettingsOverlay.close()
+    dataSettingsOverlay.open = false
 })
 
 // This Code handles the form submission within the overlay
@@ -164,15 +166,10 @@ dataSettingsOverlay.addEventListener('submit', (event) => {
     const result = Object.fromEntries(formData)
     applyTheme(result.theme)
 
-    dataSettingsOverlay.open === false
+    dataSettingsOverlay.open = false
 })
 
 // This Code initial the theme setup based on Night and Day meaning Dark and Light theme
-const dataSettingsTheme = document.querySelector('[data-settings-theme]')
-
-dataSettingsTheme.value === 'night' || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? night : day
-dataSettingsTheme.value === 'night' || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'night' : 'day'
-
 function applyTheme(theme) {
     const css = theme === 'night' ? night : day
 
@@ -264,6 +261,7 @@ function filterResults(title, genre, author) {
 function updateList(filteredResults) {
     const dataListItems = document.querySelector('[data-list-items]')
     const dataListMessage = document.querySelector('[data-list-message]')
+    
     dataListItems.innerHTML = ''
 
     if (filteredResults.length > 0) {
@@ -272,10 +270,10 @@ function updateList(filteredResults) {
             dataListItems.appendChild(listItem)
         }
         dataListMessage.style.display = 'none'
-        
+
         const dataListButton = document.querySelector('[data-list-button]')
         dataListButton.disabled = true
-        dataListButton.innerHTML = '<span>Show More (0)</span>'
+        dataListButton.innerHTML = '<span>Show More (0)</span>'        
     } else {
         dataListMessage.style.display = 'block'
 
@@ -291,7 +289,7 @@ dataSearchCancel.addEventListener('click', () => {
     dataSearchOverlay.open = false
 })
 
-//This Code lets the scroll move to the top
+//This code lets you automatically close the Search Overlay when you scrolls back to the top of the page
 window.addEventListener('scroll', () => {
     if (window.scrollY === 0) {
         dataSearchOverlay.open = false
@@ -422,14 +420,7 @@ for (const [id, name] of Object.entries(authors)) {
 
 dataSearchAuthors.appendChild(authors)
 
-
-
-
-
-
-
 dataListButton.disabled = !(matches.length - [page * BOOKS_PER_PAGE] > 0)
-
 
 const dataSearchCancel = document.querySelector('[data-search-cancel]')
 
