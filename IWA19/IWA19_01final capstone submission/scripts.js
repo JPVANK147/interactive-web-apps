@@ -289,13 +289,6 @@ dataSearchCancel.addEventListener('click', () => {
     dataSearchOverlay.open = false
 })
 
-//This code lets you automatically close the Search Overlay when you scrolls back to the top of the page
-window.addEventListener('scroll', () => {
-    if (window.scrollY === 0) {
-        dataSearchOverlay.open = false
-    }
-})
-
 /*
 const genres = document.createDocumentFragment()
 let element = document.createElement('option')
